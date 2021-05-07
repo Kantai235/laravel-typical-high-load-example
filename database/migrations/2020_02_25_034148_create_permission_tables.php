@@ -5,6 +5,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * Class CreatePermissionTables.
+ */
 class CreatePermissionTables extends Migration
 {
     /**
@@ -12,7 +15,7 @@ class CreatePermissionTables extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         $tableNames = config('permission.table_names');
         $columnNames = config('permission.column_names');
@@ -100,7 +103,7 @@ class CreatePermissionTables extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         $tableNames = config('permission.table_names');
 
