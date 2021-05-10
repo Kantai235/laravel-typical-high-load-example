@@ -138,6 +138,8 @@ class Orders extends Model
         'type',
         'active',
         'price',
+        'payment',
+        'invoice',
     ];
 
     /**

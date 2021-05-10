@@ -14,4 +14,20 @@ trait OrdersMethod
     {
         return $this->active;
     }
+
+    /**
+     * @return array
+     */
+    public function getPayment(): array
+    {
+        return json_decode($this->payment, true);
+    }
+
+    /**
+     * @return array
+     */
+    public function getInvoice(): array
+    {
+        return json_decode($this->invoice, true);
+    }
 }

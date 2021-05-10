@@ -39,6 +39,8 @@ class CreateOrdersTable extends Migration
             ])->default(Orders::UNPAID)->comment('訂單狀態');
             $table->unsignedTinyInteger('active')->default(1)->comment('啟用狀態');
             $table->integer('price')->default(0)->comment('價格');
+            $table->json('payment')->default('{}')->comment('金流資訊');
+            $table->json('invoice')->default('{}')->comment('發票資訊');
             $table->timestamps();
             $table->softDeletes();
         });
