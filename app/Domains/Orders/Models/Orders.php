@@ -27,105 +27,105 @@ class Orders extends Model
      *
      * @var int
      */
-    public const UNPAID = 1;
+    public const UNPAID = 'Unpaid';
 
     /**
      * 狀態：尚未付款並取消訂單
      *
      * @var int
      */
-    public const UNPAID_CANCEL = 2;
+    public const UNPAID_CANCEL = 'Cancel';
 
     /**
      * 狀態：已付款
      *
      * @var int
      */
-    public const PAID = 3;
+    public const PAID = 'Paid';
 
     /**
      * 狀態：已付款但取消訂單，並且尚未退款
      *
      * @var int
      */
-    public const PAID_CANCEL_NO_REFUND = 4;
+    public const PAID_CANCEL_NO_REFUND = 'No refund';
 
     /**
      * 狀態：已付款但取消訂單，並且已退款
      *
      * @var int
      */
-    public const PAID_CANCEL_REFUND = 5;
+    public const PAID_CANCEL_REFUND = 'Refund';
 
     /**
      * 狀態：已付款並開立發票
      *
      * @var int
      */
-    public const PAID_INVOICE = 6;
+    public const PAID_INVOICE = 'Paid and Invoice';
 
     /**
      * 狀態：已付款並開立發票
      *
      * @var int
      */
-    public const PAID_INVOICE_CANCEL = 7;
+    public const PAID_INVOICE_CANCEL = 'Paid nad Invoice, But Cancel';
 
     /**
      * 狀態：已付款並開立發票，但取消訂單，已退款
      *
      * @var int
      */
-    public const PAID_INVOICE_CANCEL_REFUND = 8;
+    public const PAID_INVOICE_CANCEL_REFUND = 'Paid and Invoice, But Refund';
 
     /**
      * 狀態：已付款並開立發票，但取消訂單，已退款、已取消發票
      *
      * @var int
      */
-    public const PAID_INVOICE_CANCEL_REFUND_REINVOICE = 9;
+    public const PAID_INVOICE_CANCEL_REFUND_REINVOICE = 'Paid and Invoice, But Refund and Invoice';
 
     /**
      * 狀態：完成訂單
      *
      * @var int
      */
-    public const COMPLETED = 10;
+    public const COMPLETED = 'Completed';
 
     /**
      * 狀態：完成訂單，但退貨等待受理
      *
      * @var int
      */
-    public const COMPLETED_RETURN_WAITING = 11;
+    public const COMPLETED_RETURN_WAITING = 'Completed, But Refund waiting ...';
 
     /**
      * 狀態：完成訂單，但退貨取消受理
      *
      * @var int
      */
-    public const COMPLETED_CANCEL_RETURN = 12;
+    public const COMPLETED_CANCEL_RETURN = 'Completed, But Return';
 
     /**
      * 狀態：接受退貨
      *
      * @var int
      */
-    public const ACCEPT_RETURN = 13;
+    public const ACCEPT_RETURN = 'Accept Return';
 
     /**
      * 狀態：接受退貨，已完成退款
      *
      * @var int
      */
-    public const ACCEPT_RETURN_REFUND = 14;
+    public const ACCEPT_RETURN_REFUND = 'Accept Return and Refund';
 
     /**
      * 狀態：接受退貨，已完成退款、已完成取消發票
      *
      * @var int
      */
-    public const ACCEPT_RETURN_REFUND_REINVOICE = 15;
+    public const ACCEPT_RETURN_REFUND_REINVOICE = 'Accept Return and Refund and Reinvoice';
 
     /**
      * The attributes that are mass assignable.
