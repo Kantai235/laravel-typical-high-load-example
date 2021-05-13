@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->uuid('uuid');
+            $table->morphs('model');
             $table->enum('type', [
                 Orders::UNPAID,
                 Orders::UNPAID_CANCEL,

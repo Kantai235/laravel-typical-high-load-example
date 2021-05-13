@@ -12,6 +12,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 trait OrderItemsRelationship
 {
     /**
+     * Get all of the owning this models.
+     */
+    public function model()
+    {
+        return $this->morphTo();
+    }
+
+    /**
      * Get the order associated with the Item.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

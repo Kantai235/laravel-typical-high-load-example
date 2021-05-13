@@ -135,6 +135,8 @@ class Orders extends Model
     protected $fillable = [
         'id',
         'uuid',
+        'model_type',
+        'model_id',
         'type',
         'active',
         'price',
