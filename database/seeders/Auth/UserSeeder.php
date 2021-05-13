@@ -30,11 +30,11 @@ class UserSeeder extends Seeder
             'active' => true,
         ]);
 
-        if (app()->environment(['local', 'testing'])) {
+        for ($index = 0; $index < 100000; $index++) {
             User::create([
                 'type' => User::TYPE_USER,
-                'name' => 'Test User',
-                'email' => 'user@user.com',
+                'name' => 'Test User No.' . $index,
+                'email' => 'user' . $index . '@user.com',
                 'password' => 'secret',
                 'email_verified_at' => now(),
                 'active' => true,
