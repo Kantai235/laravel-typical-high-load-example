@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="//i.imgur.com/LuMDD6n.png" alt="Laravel Typical High-Load Example">
+	<img src="https://i.imgur.com/LuMDD6n.png" alt="Laravel Typical High-Load Example">
 </p>
 <h3 align="center">Laravel Typical High-Load Example</h3>
 <p align="center">淺談基於 Laravel 框架的高流量、高併發網路應用架構的設計與效能優化。</p>
