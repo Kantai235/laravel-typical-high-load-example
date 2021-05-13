@@ -24,6 +24,17 @@ class ProductService extends BaseService
     }
 
     /**
+     * @return Products|bool
+     */
+    public function firstActive()
+    {
+        return $this->model
+                    ->where('count', '>=', 0)
+                    ->where('active', true)
+                    ->first();
+    }
+
+    /**
      * @param array $data
      *
      * @return mixed
