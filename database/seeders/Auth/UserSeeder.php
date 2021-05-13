@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             'active' => true,
         ]);
 
-        for ($index = 0; $index < 100000; $index++) {
+        for ($index = 0; $index < 100; $index++) {
             User::create([
                 'type' => User::TYPE_USER,
                 'name' => 'Test User No.' . $index,
