@@ -2,7 +2,10 @@
 
 namespace App\Domains\Orders\Services;
 
+use App\Domains\Auth\Models\User;
+use App\Domains\Orders\Models\OrderItems;
 use App\Domains\Orders\Models\Orders;
+use App\Domains\Products\Models\Products;
 use App\Exceptions\GeneralException;
 use App\Services\BaseService;
 use Exception;
@@ -36,15 +39,31 @@ class OrderService extends BaseService
 
         try {
             $order = $this->createOrder([
+                'model_id' => $data['model_id'],
                 'type' => $data['type'],
                 'active' => isset($data['active']) && $data['active'] === '1',
-                'price' => $data['price'] ?? 0,
                 'payment' => isset($data['payment']) ? json_encode($data['payment']) : '{}',
                 'invoice' => isset($data['invoice']) ? json_encode($data['invoice']) : '{}',
             ]);
 
-            // TODO: Need add order sync items.
-            // $order->sync($data['items'] ?? []);
+            $price = 0;
+            foreach ($data['items'] as $item) {
+                $product = Products::find($item['id']);
+                $product->count = $product->count - $item['count'];
+                $product->save();
+
+                $model = new OrderItems();
+                $model->order_id = $order->id;
+                $model->product_id = $product->id;
+                $model->price = $product->price;
+                $model->count = $item['count'];
+                $model->save();
+
+                $price = $price + ($model->price * $model->count);
+            }
+
+            $order->price = $price;
+            $order->save();
         } catch (Exception $e) {
             DB::rollBack();
 
@@ -52,41 +71,6 @@ class OrderService extends BaseService
         }
 
         // event(new OrdersCreated($order));
-
-        DB::commit();
-
-        return $order;
-    }
-
-    /**
-     * @param Orders $order
-     * @param array $data
-     *
-     * @return Orders
-     * @throws \Throwable
-     */
-    public function update(Orders $order, array $data = []): Orders
-    {
-        DB::beginTransaction();
-
-        try {
-            $order->update([
-                'type' => $data['type'] ?? $order->type,
-                'active' => isset($data['active']) && $data['active'] === '1',
-                'price' => $data['price'] ?? $order->price,
-                'payment' => isset($data['payment']) ? json_encode($data['payment']) : $order->payment,
-                'invoice' => isset($data['invoice']) ? json_encode($data['invoice']) : $order->invoice,
-            ]);
-
-            // TODO: Need add order sync items.
-            // $order->sync($data['items'] ?? []);
-        } catch (Exception $e) {
-            DB::rollBack();
-
-            throw new GeneralException(__('There was a problem updating this order. Please try again.'));
-        }
-
-        // event(new OrderUpdated($order));
 
         DB::commit();
 
@@ -172,6 +156,8 @@ class OrderService extends BaseService
     protected function createOrder(array $data = []): Orders
     {
         return $this->model::create([
+            'model_type' => User::class,
+            'model_id' => $data['model_id'],
             'type' => $data['type'],
             'active' => $data['active'] ?? true,
             'price' => $data['price'] ?? 0,
