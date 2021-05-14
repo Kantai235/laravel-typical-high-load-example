@@ -9,6 +9,7 @@ use Tabuna\Breadcrumbs\Trail;
  * Frontend Controllers
  * All route names are prefixed with 'frontend.'.
  */
+
 Route::get('/', [HomeController::class, 'index'])
     ->name('index')
     ->breadcrumbs(function (Trail $trail) {
@@ -16,10 +17,10 @@ Route::get('/', [HomeController::class, 'index'])
     });
 
 Route::get('shopping', [ShoppingController::class, 'shopping'])
-    ->name('shopping')
-    ->breadcrumbs(function (Trail $trail) {
-        $trail->push(__('Shopping'), route('frontend.shopping'));
-    });
+    ->name('shopping');
+
+Route::get('order/{order}', [ShoppingController::class, 'order'])
+    ->name('order');
 
 Route::get('terms', [TermsController::class, 'index'])
     ->name('pages.terms')

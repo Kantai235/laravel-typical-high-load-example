@@ -7,7 +7,6 @@ use App\Domains\Orders\Models\Orders;
 use App\Domains\Orders\Services\OrderService;
 use App\Domains\Products\Services\ProductService;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 /**
  * Class ShoppingController.
@@ -37,11 +36,9 @@ class ShoppingController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @return \Illuminate\View\View
      */
-    public function shopping(Request $request)
+    public function shopping()
     {
         $user = User::find(mt_rand(2, 101));
         $products = array();
@@ -67,6 +64,16 @@ class ShoppingController extends Controller
             'items' => $products,
         ));
 
+        return view('frontend.order.index')->withOrder($order);
+    }
+
+    /**
+     * @param Orders $order
+     *
+     * @return \Illuminate\View\View
+     */
+    public function order(Orders $order)
+    {
         return view('frontend.order.index')->withOrder($order);
     }
 }
