@@ -19,6 +19,9 @@ Route::get('/', [HomeController::class, 'index'])
 Route::get('shopping', [ShoppingController::class, 'shopping'])
     ->name('shopping');
 
+Route::get('shopping/delete', [ShoppingController::class, 'shoppingDelete'])
+    ->name('shopping.delete');
+
 Route::get('order/{order}', [ShoppingController::class, 'order'])
     ->name('order');
 

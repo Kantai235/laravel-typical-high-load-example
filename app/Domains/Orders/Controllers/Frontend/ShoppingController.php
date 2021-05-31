@@ -40,6 +40,46 @@ class ShoppingController extends Controller
      */
     public function shopping()
     {
+        $order = $this->createOrder();
+
+        return view('frontend.order.index')
+            ->with('order', $order)
+            ->with('items', $order->items);
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function shoppingDelete()
+    {
+        $order = $this->createOrder();
+        $items = $order->items;
+
+        $this->orderService->delete($order);
+        $this->orderService->destroy($order);
+
+        return view('frontend.order.index')
+            ->with('order', $order)
+            ->with('items', $items);
+    }
+
+    /**
+     * @param Orders $order
+     *
+     * @return \Illuminate\View\View
+     */
+    public function order(Orders $order)
+    {
+        return view('frontend.order.index')->with('order', $order);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Orders
+     */
+    protected function createOrder(): Orders
+    {
         $user = User::find(mt_rand(2, 11));
         $products = array();
         for ($i = 0; $i < mt_rand(1, 10); $i++) {
@@ -64,16 +104,6 @@ class ShoppingController extends Controller
             'items' => $products,
         ));
 
-        return view('frontend.order.index')->withOrder($order);
-    }
-
-    /**
-     * @param Orders $order
-     *
-     * @return \Illuminate\View\View
-     */
-    public function order(Orders $order)
-    {
-        return view('frontend.order.index')->withOrder($order);
+        return $order;
     }
 }

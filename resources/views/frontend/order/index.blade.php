@@ -23,7 +23,7 @@
 
                         <article class="card">
                             <header class="card-header"> Payment Summary </header>
-                            @foreach ($order->items as $item)
+                            @foreach ($items as $item)
                                 <div class="row row-main p-2 mt-2">
                                     <div class="col-2 text-center">
                                         <img class="img-fluid" style="height: 128px;" src="/img/product/default.png">
