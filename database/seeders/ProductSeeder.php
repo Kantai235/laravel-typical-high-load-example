@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
 
         $this->truncate('products');
 
-        for ($index = 1; $index <= 100; $index++) {
+        for ($index = 1; $index <= 10; $index++) {
             Products::create([
                 'name' => Str::random(125),
                 'avatar' => 'img/product/default.png',

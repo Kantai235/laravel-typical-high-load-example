@@ -40,7 +40,7 @@ class ShoppingController extends Controller
      */
     public function shopping()
     {
-        $user = User::find(mt_rand(2, 101));
+        $user = User::find(mt_rand(2, 11));
         $products = array();
         for ($i = 0; $i < mt_rand(1, 10); $i++) {
             $product = $this->productService->firstActive();
