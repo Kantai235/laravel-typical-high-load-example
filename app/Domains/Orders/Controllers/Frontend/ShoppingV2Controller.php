@@ -3,15 +3,16 @@
 namespace App\Domains\Orders\Controllers\Frontend;
 
 use App\Domains\Auth\Models\User;
+use App\Domains\Orders\Jobs\AsyncCreateOrder;
 use App\Domains\Orders\Models\Orders;
 use App\Domains\Orders\Services\OrderService;
 use App\Domains\Products\Services\ProductService;
 use App\Http\Controllers\Controller;
 
 /**
- * Class ShoppingController.
+ * Class ShoppingV2Controller.
  */
-class ShoppingController extends Controller
+class ShoppingV2Controller extends Controller
 {
     /**
      * @var OrderService
@@ -70,7 +71,8 @@ class ShoppingController extends Controller
      */
     public function order(Orders $order)
     {
-        return view('frontend.order.index')->with('order', $order);
+        return view('frontend.order.index')
+            ->with('order', $order);
     }
 
     /**
@@ -96,6 +98,18 @@ class ShoppingController extends Controller
                 ));
             }
         }
+
+        AsyncCreateOrder::dispatch($user, $products);
+
+        return new Orders([
+            'model_type' => User::class,
+            'model_id' => $user->id,
+            'type' => Orders::UNPAID,
+            'active' => true,
+            'price' => $data['price'] ?? 0,
+            'payment' => '{}',
+            'invoice' => '{}',
+        ]);
 
         $order = $this->orderService->store(array(
             'model_id' => $user->id,
