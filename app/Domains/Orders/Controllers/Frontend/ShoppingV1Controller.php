@@ -43,7 +43,7 @@ class ShoppingV1Controller extends Controller
     {
         $order = $this->createOrder();
 
-        return view('frontend.order.index')
+        return view('frontend.order.index-v1')
             ->with('order', $order)
             ->with('items', $order->items);
     }
@@ -59,7 +59,7 @@ class ShoppingV1Controller extends Controller
         $this->orderService->delete($order);
         $this->orderService->destroy($order);
 
-        return view('frontend.order.index')
+        return view('frontend.order.index-v1')
             ->with('order', $order)
             ->with('items', $items);
     }
@@ -71,8 +71,9 @@ class ShoppingV1Controller extends Controller
      */
     public function order(Orders $order)
     {
-        return view('frontend.order.index')
-            ->with('order', $order);
+        return view('frontend.order.index-v1')
+            ->with('order', $order)
+            ->with('items', $order->items);
     }
 
     /**

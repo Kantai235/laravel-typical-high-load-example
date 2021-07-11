@@ -43,7 +43,7 @@ class ShoppingV2Controller extends Controller
     {
         $order = $this->createOrder();
 
-        return view('frontend.order.index')
+        return view('frontend.order.index-v2')
             ->with('order', $order)
             ->with('items', $order->items);
     }
@@ -59,7 +59,7 @@ class ShoppingV2Controller extends Controller
         $this->orderService->delete($order);
         $this->orderService->destroy($order);
 
-        return view('frontend.order.index')
+        return view('frontend.order.index-v2')
             ->with('order', $order)
             ->with('items', $items);
     }
@@ -71,8 +71,9 @@ class ShoppingV2Controller extends Controller
      */
     public function order(Orders $order)
     {
-        return view('frontend.order.index')
-            ->with('order', $order);
+        return view('frontend.order.index-v2')
+            ->with('order', $order)
+            ->with('items', $order->items);
     }
 
     /**
@@ -110,14 +111,5 @@ class ShoppingV2Controller extends Controller
             'payment' => '{}',
             'invoice' => '{}',
         ]);
-
-        $order = $this->orderService->store(array(
-            'model_id' => $user->id,
-            'type' => Orders::UNPAID,
-            'active' => true,
-            'items' => $products,
-        ));
-
-        return $order;
     }
 }
