@@ -67,6 +67,11 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('order', function ($uuid) {
             return Orders::uuid($uuid)->first();
         });
+
+        // To be able to restore a order number, since the default binding is a find and would result in a 404
+        Route::bind('orderNumber', function ($number) {
+            return Orders::where('number', $number)->first();
+        });
     }
 
     /**

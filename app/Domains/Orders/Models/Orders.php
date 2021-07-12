@@ -142,6 +142,7 @@ class Orders extends Model
         'price',
         'payment',
         'invoice',
+        'number',
     ];
 
     /**

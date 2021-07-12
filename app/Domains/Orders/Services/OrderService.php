@@ -10,6 +10,7 @@ use App\Exceptions\GeneralException;
 use App\Services\BaseService;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 /**
  * Class OrderService.
@@ -44,6 +45,7 @@ class OrderService extends BaseService
                 'active' => isset($data['active']) && $data['active'] === '1',
                 'payment' => isset($data['payment']) ? json_encode($data['payment']) : '{}',
                 'invoice' => isset($data['invoice']) ? json_encode($data['invoice']) : '{}',
+                'number' => isset($data['number']) ? $data['number'] : null,
             ]);
 
             $price = 0;
@@ -163,6 +165,7 @@ class OrderService extends BaseService
             'price' => $data['price'] ?? 0,
             'payment' => isset($data['payment']) ? json_encode($data['payment']) : '{}',
             'invoice' => isset($data['invoice']) ? json_encode($data['invoice']) : '{}',
+            'number' => $data['number'] ?? Str::random(32),
         ]);
     }
 }
