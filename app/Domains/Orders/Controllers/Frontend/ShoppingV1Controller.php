@@ -2,8 +2,6 @@
 
 namespace App\Domains\Orders\Controllers\Frontend;
 
-use App\Domains\Auth\Models\User;
-use App\Domains\Orders\Jobs\AsyncCreateOrder;
 use App\Domains\Orders\Models\Orders;
 use App\Domains\Orders\Services\OrderService;
 use App\Domains\Products\Services\ProductService;
@@ -83,7 +81,6 @@ class ShoppingV1Controller extends Controller
      */
     protected function createOrder(): Orders
     {
-        $user = User::find(mt_rand(2, 11));
         $products = array();
         for ($i = 0; $i < mt_rand(1, 10); $i++) {
             $product = $this->productService->firstActive();
@@ -101,7 +98,7 @@ class ShoppingV1Controller extends Controller
         }
 
         $order = $this->orderService->store(array(
-            'model_id' => $user->id,
+            'model_id' => mt_rand(2, 11),
             'type' => Orders::UNPAID,
             'active' => true,
             'items' => $products,

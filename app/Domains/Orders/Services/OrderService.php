@@ -28,6 +28,24 @@ class OrderService extends BaseService
     }
 
     /**
+     * @param string $number
+     *
+     * @return Orders|boolean
+     */
+    public function findByNumber(string $number)
+    {
+        $order = $this->model
+            ->where('number', $number)
+            ->first();
+
+        if ($order instanceof $this->model) {
+            return $order;
+        }
+
+        return false;
+    }
+
+    /**
      * @param array $data
      *
      * @return Orders
