@@ -1,0 +1,11 @@
+/*!
+  * CoreUI v3.4.0 (https://coreui.io)
+  * Copyright 2020 creativeLabs Łukasz Holeczek
+  * Licensed under MIT (https://coreui.io)
+  */
+
+/*!
+ * perfect-scrollbar v1.5.0
+ * Copyright 2020 Hyunje Jun, MDBootstrap and Contributors
+ * Licensed under MIT
+ */
