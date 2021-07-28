@@ -41,7 +41,7 @@ Route::group([
         Route::get('shopping/delete', [ShoppingV2Controller::class, 'shoppingDelete'])
             ->name('shopping.delete');
 
-        Route::get('order/{order}', [ShoppingV2Controller::class, 'order'])
+        Route::get('order/{uuid}', [ShoppingV2Controller::class, 'order'])
             ->name('order');
     });
 });

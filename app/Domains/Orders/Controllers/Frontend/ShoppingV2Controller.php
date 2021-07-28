@@ -6,6 +6,7 @@ use App\Domains\Orders\Jobs\AsyncCreateAndDeleteOrder;
 use App\Domains\Orders\Jobs\AsyncCreateOrder;
 use App\Domains\Orders\Models\Orders;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 
 /**
@@ -40,14 +41,28 @@ class ShoppingV2Controller extends Controller
     }
 
     /**
-     * @param Orders $order
+     * @param string $uuid
      *
      * @return \Illuminate\View\View
      */
-    public function order(Orders $order)
+    public function order(string $uuid)
     {
-        return view('frontend.order.index-v2')
-            ->with('order', $order)
-            ->with('items', $order->items);
+        if ($order = Redis::get('order:' . $uuid)) {
+            return view('frontend.order.index-v2r')
+                ->with('order', json_decode($order));
+        }
+
+        if ($order = Orders::uuid($uuid)->first()) {
+            $items = $order->items;
+            foreach ($items as $item) {
+                $item->product;
+            }
+            Redis::set("order:$uuid", $order);
+
+            return view('frontend.order.index-v2r')
+                ->with('order', $order);
+        }
+
+        return redirect()->route('frontend.index')->withFlashDanger(__('Order is Not Found.'));
     }
 }
