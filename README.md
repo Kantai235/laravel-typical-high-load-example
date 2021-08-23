@@ -15,8 +15,10 @@
 # 目錄
 - [摘要](https://github.com/Kantai235/laravel-typical-high-load-example/wiki/摘要)
 - [前言](https://github.com/Kantai235/laravel-typical-high-load-example/wiki/前言)
-- [研究背景](https://github.com/Kantai235/laravel-typical-high-load-example/wiki/研究背景)
-- [網路應用架構的設計](https://github.com/Kantai235/laravel-typical-high-load-example/wiki/網路應用架構的設計)
-- [效能優化](https://github.com/Kantai235/laravel-typical-high-load-example/wiki/效能優化)
+- [初始數值](https://github.com/Kantai235/laravel-typical-high-load-example/wiki/初始數值)
+- [系統架構](https://github.com/Kantai235/laravel-typical-high-load-example/wiki/系統架構)
+- [隊列(Queue)改善](https://github.com/Kantai235/laravel-typical-high-load-example/wiki/隊列(Queue)改善)
+- [使用 Redis 快取](https://github.com/Kantai235/laravel-typical-high-load-example/wiki/使用%20Redis%20快取)
+- [數值比較](https://github.com/Kantai235/laravel-typical-high-load-example/wiki/數值比較)
 - [結論](https://github.com/Kantai235/laravel-typical-high-load-example/wiki/結論)
 - [參考文獻](https://github.com/Kantai235/laravel-typical-high-load-example/wiki/參考文獻)
